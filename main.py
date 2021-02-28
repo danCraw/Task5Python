@@ -18,14 +18,9 @@ class MyIterator:
         else:
             raise StopIteration
 
-
-def printList(inputList):
-    return inputList
-
-
 def buildNewListDecorator(decoratedFunction):
-
     def buildNewList(inputList):
+
         list.reverse(inputList)
         myIter = MyIterator(inputList)
 
@@ -34,9 +29,12 @@ def buildNewListDecorator(decoratedFunction):
             if (inputList.count(i) / 2 == 1.0) and (newList.count(i) == 0):
                 newList.append(i)
         return newList
-    return buildNewList(decoratedFunction)
+    return buildNewList
+
+@buildNewListDecorator
+def printList(inputList):
+    return inputList
 
 if __name__ == '__main__':
     inputList = [1, 2, 3, 1, 2, 3, 9, 9]
     print(printList(inputList))
-    print(buildNewListDecorator(printList(inputList)))
